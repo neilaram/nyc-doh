@@ -27,9 +27,9 @@ ${DB_PATH}: ${CSV_FILE} sql/init.sql
 		sqlite3 ${DB_PATH} < sql/init.sql
 
 # Print the contents of the stats tables
-print_stats:
+print_stats: ${DB_PATH}
 	@sqlite3 ${DB_PATH} < sql/stats.sql; \
-	for table in Days_Between_Inspections_By_Grade Inspections_By_Day_Of_Week Days_Between_Inspections_By_Borough Fast_Food_Scores; do \
+	for table in Days_Between_Inspections_By_Grade Inspections_By_Day_Of_Week Days_Between_Inspections_By_Borough; do \
 		echo $$table: | sed 's/_/ /g'; \
 	  echo ".mode column\n.header on\nSELECT * from $$table" | sqlite3 ${DB_PATH}; \
 		echo '\n\n'; \
