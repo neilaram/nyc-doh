@@ -1,0 +1,4 @@
+server/data/*.csv
+server/data/*.db
+server/server
+server/misc/*
